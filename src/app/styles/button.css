@@ -1,0 +1,25 @@
+.BButton1 {
+  background-color: #1d2b53;
+  width: 300px;
+  height: 100px;
+  font-family: "Anakotmai";
+  font-size: 48px;
+  color: white;
+  font-weight: bold;
+  border-radius: 60px;
+}
+.BButton1:hover {
+  background-color: green;
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+
+.BButton1:hover::after {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}

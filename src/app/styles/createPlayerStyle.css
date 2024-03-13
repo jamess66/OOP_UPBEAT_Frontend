@@ -1,0 +1,121 @@
+.component-setplayergame-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  font-family: anakotmai;
+  font-size: 46px;
+  font-weight: bold;
+}
+.component-setplayergame-front {
+  /* display: flex;
+  flex-direction: column;
+  align-items: top;
+  justify-content: start;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  font-family: anakotmai;
+  font-size: 46px;
+  font-weight: bold;
+  background-color: #0e1529;
+  color: white; */
+}
+
+.boderuser {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #1d2b53;
+  border-radius: 60px;
+  width: 600px;
+  height: 600px;
+  font-size: 24px;
+  font-family: anakotmai;
+  text-align: center;
+}
+
+.textarea-styles {
+  align-items: center;
+  justify-content: center;
+  color: #040634;
+  width: 300px;
+  height: 50px;
+  font-size: 24px;
+}
+
+.inputname {
+  border: 5px solid #ffffff;
+  color: #040634;
+  border-radius: 10px 10px;
+  padding: 8px;
+  font-size: 24px;
+  width: 100%;
+  width: 450px;
+  height: 70px;
+  box-sizing: border-box;
+}
+
+::placeholder {
+  color: red;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12-18 */
+  color: red;
+}
+
+.inputnameerror {
+  border: 5px solid #ff0000;
+  color: #040634;
+  border-radius: 10px 10px;
+  padding: 8px;
+  font-size: 24px;
+  width: 100%;
+  width: 450px;
+  height: 70px;
+  box-sizing: border-box;
+}
+
+.buttonjoin {
+  border-radius: 10px;
+  border: 2px;
+  font-size: 28px;
+  background: #45a445;
+  width: 200px;
+}
+.buttonjoin:hover {
+  background-color: #45a445;
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+.buttonback {
+  border-radius: 10px;
+  border: 2px;
+  font-size: 28px;
+  background: #8a8a8a;
+  width: 200px;
+}
+.buttonback:hover {
+  background-color: #8a8a8a;
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+
+.warning-text {
+  font-size: 28px;
+  color: red;
+}
+
+#forbackstep {
+  margin-top: 1%;
+  margin-left: 38%;
+}
+#forsave {
+  background-color: greenyellow;
+}

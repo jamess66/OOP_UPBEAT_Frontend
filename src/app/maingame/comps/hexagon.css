@@ -1,0 +1,21 @@
+.hex-grid-content {
+  /* position: fixed; */
+  height: 45px;
+  width: 50px;
+  font-size: 20px;
+  /* background-color: white; */
+  color: #ffccaa;
+  clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.24s;
+  margin-bottom: 0px;
+}
+
+.hex-grid-content:hover {
+  background-color: #ffccaa;
+}
+.hex-grid-content:active {
+  transform: scale(0.24);
+}
