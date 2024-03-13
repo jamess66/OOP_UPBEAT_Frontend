@@ -1,0 +1,20 @@
+.tab-container {
+  display: flex;
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
+  /* Additional styling for info component */
+}
+.chat-container {
+  display: flex;
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
+  /* Additional styling for chat component */
+}
+
+button.zoomController {
+  color: #ff9646;
+  border: 2px;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+}

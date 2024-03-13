@@ -1,0 +1,43 @@
+.backlobby {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #1d2b53;
+  border-radius: 60px;
+  width: 600px;
+  height: 900px;
+  font-size: 24px;
+  font-family: anakotmai;
+  text-align: center;
+  background-color: #83769c;
+}
+.button {
+  background-color: #1d2b53;
+  width: 200px;
+  height: 80px;
+  padding-top: 10px;
+  font-family: "Anakotmai";
+  font-size: 38px;
+  color: white;
+  font-weight: bold;
+  /* margin-left: 35%; */
+  margin-top: 50%;
+  border-radius: 60px;
+  justify-content: center;
+  align-items: center;
+  /* position: absolute; */
+}
+.button:hover {
+  /* position: absolute; */
+  background-color: green;
+  transform: scale(1.1);
+  transition: all 0.2s;
+}
+
+.main-text {
+  font-size: 68px;
+  font-family: "Anakotmai";
+  color: white;
+  font-weight: bold;
+}

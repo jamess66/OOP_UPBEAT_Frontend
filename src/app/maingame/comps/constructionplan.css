@@ -1,0 +1,34 @@
+.input_box {
+  width: 450px;
+  height: 760px;
+  border-radius: 4px;
+  padding: 20px 20px 700px;
+  transition: 0.2s;
+  font-size: 18px;
+  /* justify-items: auto; */
+  align-items: center;
+  border: 1px solid black;
+  font-family: "Anakotmai";
+  color: black;
+}
+.box {
+  margin-left: -80%;
+  margin-top: -85%;
+  width: 523px;
+  height: 970px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #83769c;
+}
+.box_cover {
+  margin-top: 20px;
+  margin-left: 30px;
+  width: 450px;
+  height: 750px;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #fff;
+  justify-content: center;
+  justify-items: auto;
+  align-items: center;
+}
