@@ -1,5 +1,5 @@
 # OOP_UPBEAT_Frontend
-The UPBEAT game frontend by react
+The UPBEAT game frontend using React
 
 ## Group24
 
