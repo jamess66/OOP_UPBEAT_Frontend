@@ -7,6 +7,17 @@ The UPBEAT game frontend using React
 
 [Old Frontend Repository](https://github.com/Unlxii/UPBEAT_Frontend)
 
+## How to Setup?
+1. make sure your Next.js is 14.1.0 or latest
+2. run 
+   ```console
+   npm i
+   ```
+3. run
+   ```console
+   npm run dev
+   ```
+
 ### How to Start?
 1. run backend.
 2. run frontend.
