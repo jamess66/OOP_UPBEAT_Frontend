@@ -10,7 +10,7 @@ export default function Home() {
     setIsClickable(false);
     let serverAdress;
     if (!localStorage.getItem("serveradress")) {
-      serverAdress = prompt("Enter server adress.", "192.168.234.183");
+      serverAdress = prompt("Enter server adress.", "192.168.XXX.XXX");
     } else {
       serverAdress = localStorage.getItem("serveradress");
     }
