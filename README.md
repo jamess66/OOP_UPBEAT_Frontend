@@ -15,7 +15,7 @@ The UPBEAT game frontend by react
 5. enjoy the game.
    
 (play in other devices)
-1. enter (frontend server address):3000 e.g., http://192.168.XXX.XXX:3000/ in other device browser. (do the same as step 4. above if the frontend and backend are isolate.)
+1. enter (frontend server address):3000 e.g., http://192.168.XXX.XXX:3000/ in other device browser. (do the same as step 4. above if the frontend and backend are isolated.)
 2. enter backend server address. 
 
 
