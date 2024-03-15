@@ -15,8 +15,7 @@ The UPBEAT game frontend by react
 5. enjoy the game.
    
 (play in other devices)
-6. enter (ip adress):3000 (e.g., http://192.168.XXX.XXX:3000/)
-7. do the same in step 4. and 5.
-8. enjoy.
+1. enter (ip adress):3000 (e.g., http://192.168.XXX.XXX:3000/)
+2. do the same in step 4. and 5 above. 
 
 
