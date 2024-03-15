@@ -10,7 +10,7 @@ The UPBEAT game frontend by react
 ### How to Start
 1. run backend
 2. run frontend
-3. go to http://localhost:3000/ (if want to play together do the step 6. below.)
+3. go to http://localhost:3000/ (if want to play together follow the steps below.)
 4. enter backend server address (run terminal ipconfig (windows) / ifconfig (mac) in device that run backend server and get IPv4 { example, 192.168.XXX.XXX })
 5. enjoy the game.
    
