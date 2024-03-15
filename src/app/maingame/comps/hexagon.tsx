@@ -54,7 +54,9 @@ function Hexagon() {
 
   const fetchTerritory = async () => {
     try {
-      const response = await fetch(`http://${localStorage.getItem("serveradress")}:8080/territory`);
+      const response = await fetch(
+        `http://${localStorage.getItem("serveradress")}:8080/territory`
+      );
       if (response.ok) {
         const data: HexGrid = await response.json();
         setHexGrid(data);
@@ -66,15 +68,12 @@ function Hexagon() {
     }
   };
 
-
-
   useEffect(() => {
     fetchTerritory();
+
     const intervalId = setInterval(fetchTerritory, refreshInterval);
     return () => clearInterval(intervalId);
   }, []);
-
-
 
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
@@ -187,6 +186,20 @@ function Hexagon() {
                           ? ""
                           : String(HexGrid.grid[i][j].deposit)}
                       </div>
+                      {HexGrid.grid[i][j].regionColor !== "#ffffff" && (
+                        <img
+                          src="chess-piece.png"
+                          alt="Player icon"
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "20px",
+                            height: "20px",
+                          }}
+                        />
+                      )}
                     </div>
                   );
                 })}
