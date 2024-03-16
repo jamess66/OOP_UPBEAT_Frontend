@@ -30,7 +30,9 @@ function lobby() {
 
   const fetchPlayers = async () => {
     try {
-      const response = await fetch(`http://${localStorage.getItem("serveradress")}:8080/players`);
+      const response = await fetch(
+        `http://${localStorage.getItem("serveradress")}:8080/players`
+      );
       if (response.ok) {
         const data: PlayerInstance[] = await response.json();
         setPlayers(data);
@@ -59,16 +61,49 @@ function lobby() {
   return (
     <header className="backgorund">
       <div className="backlobby">
-        <p className="main-text" style={{ marginTop: "50px" }}>
+        <p
+          className="main-text"
+          style={{
+            marginTop: "50px",
+            fontSize: "bold",
+            fontWeight: "bold",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          }}
+        >
           LOBBY
         </p>
         <ul>
-          {players.map((player) => (
+          {players.map((player, index) => (
             <li key={player.playerName}>
-              {player.playerName}
-              {player.playerName == sessionStorage.getItem("playername")
-                ? " (You)"
-                : ""}
+              <span
+                style={{
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
+                }}
+              >
+                {player.playerName}
+              </span>
+              {player.playerName === sessionStorage.getItem("playername") && (
+                <span
+                  style={{
+                    color: "lightgreen",
+                    fontWeight: "bold",
+                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.35)",
+                  }}
+                >
+                  {" "}
+                  (You)
+                </span>
+              )}
+              {index !== players.length - 1 && (
+                <hr
+                  style={{
+                    borderColor: "lightgray",
+                    borderStyle: "solid",
+                    width: "80%",
+                    margin: "10px auto",
+                  }}
+                />
+              )}
             </li>
           ))}
         </ul>

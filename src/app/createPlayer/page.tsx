@@ -62,7 +62,10 @@ function playergame() {
   const createPlayer = async () => {
     console.log(username);
     try {
-      const res = await axios.post(`http://${localStorage.getItem("serveradress")}:8080/player`, username);
+      const res = await axios.post(
+        `http://${localStorage.getItem("serveradress")}:8080/player`,
+        username
+      );
     } catch (error) {
       console.log("Error posting username", error);
     }

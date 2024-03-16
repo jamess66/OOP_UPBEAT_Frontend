@@ -44,11 +44,15 @@ export default function Home() {
       <Image src="/UPBEATfont.png" alt="Cover" width={800} height={600} />
       <div className=" mt-16">
         <button
-          onClick={handlePlayClick}
+          onClick={async () => {
+            const audio = new Audio("/audio/click-sound.mp3");
+            await audio.play();
+            handlePlayClick();
+          }}
           className="buttonplay"
           disabled={!isClickable}
         >
-          {isClickable ? "Play" : "Loading"}
+          {isClickable ? <strong>Play</strong> : "Loading"}
         </button>
       </div>
     </main>
