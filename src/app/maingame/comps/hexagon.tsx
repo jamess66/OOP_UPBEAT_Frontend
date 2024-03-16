@@ -6,7 +6,7 @@ import {
   TransformComponent,
   useControls,
 } from "react-zoom-pan-pinch";
-
+import shuffle from "lodash/shuffle";
 import "./hexagon.css";
 import "../style.css";
 
@@ -51,7 +51,16 @@ function Hexagon() {
     rows: 0,
     cols: 0,
   });
-
+  const [shuffledIcons, setShuffledIcons] = useState<string[]>([]);
+  const [playerIcons, setPlayerIcons] = useState<string[]>([
+    "chess-piece1.png",
+    "chess-piece2.png",
+    "chess-piece3.png",
+    "chess-piece4.png",
+    "chess-piece5.png",
+    "chess-piece6.png",
+    "chess-piece7.png",
+  ]);
   const fetchTerritory = async () => {
     try {
       const response = await fetch(
@@ -74,6 +83,17 @@ function Hexagon() {
     const intervalId = setInterval(fetchTerritory, refreshInterval);
     return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    setShuffledIcons(playerIcons);
+  }, []);
+
+  const removePlayerIcon = (playerIconToRemove: string) => {
+    const updatedPlayerIcons = playerIcons.filter(
+      (icon) => icon !== playerIconToRemove
+    );
+    setPlayerIcons(updatedPlayerIcons);
+  };
 
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
@@ -188,15 +208,15 @@ function Hexagon() {
                       </div>
                       {HexGrid.grid[i][j].regionColor !== "#ffffff" && (
                         <img
-                          src="chess-piece.png"
+                          src={shuffledIcons[j % shuffledIcons.length]}
                           alt="Player icon"
                           style={{
                             position: "absolute",
                             top: "50%",
                             left: "50%",
                             transform: "translate(-50%, -50%)",
-                            width: "20px",
-                            height: "20px",
+                            width: "40px",
+                            height: "40px",
                           }}
                         />
                       )}
