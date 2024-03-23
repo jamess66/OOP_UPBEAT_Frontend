@@ -30,13 +30,30 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid #1d2b53;
+  border: 3px solid #1d2b53;
   border-radius: 60px;
   width: 600px;
   height: 600px;
   font-size: 24px;
   font-family: anakotmai;
   text-align: center;
+  animation: borderGlow 4s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes borderGlow {
+  0% {
+    border-color: #1d2b53;
+    box-shadow: 0 0 10px #1d2b53;
+  }
+  50% {
+    border-color: #83769c;
+    box-shadow: 0 0 20px #83769c;
+  }
+  100% {
+    border-color: #1d2b53;
+    box-shadow: 0 0 10px #1d2b53;
+  }
 }
 
 .textarea-styles {
@@ -92,7 +109,12 @@
 .buttonjoin:hover {
   background-color: #45a445;
   transform: scale(1.1);
-  transition: all 0.5s;
+  transition: all 0.25s;
+}
+.buttonjoin:not(:hover) {
+  transform: scale(1);
+  transition: all 0.25s;
+  box-shadow: none;
 }
 .buttonback {
   border-radius: 10px;
@@ -104,11 +126,15 @@
 .buttonback:hover {
   background-color: #8a8a8a;
   transform: scale(1.1);
-  transition: all 0.5s;
+  transition: all 0.25s;
+}
+.buttonback:not(:hover) {
+  transform: scale(1);
+  transition: all 0.25s;
 }
 
 .warning-text {
-  font-size: 28px;
+  font-size: 24px;
   color: red;
 }
 
