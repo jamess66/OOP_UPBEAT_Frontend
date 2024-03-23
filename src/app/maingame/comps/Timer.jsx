@@ -7,10 +7,30 @@ const AlarmClock = () => {
   const refreshInterval = 1000; // refresh every 5 sec
 
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-
   const [isLose, setIsLose] = useState(false);
   const [remainingTime, setRemainingTime] = useState();
   const [reserveTime, setReserveTime] = useState();
+
+  const fetchPlayerInfo = async () => {
+    try {
+      const name = sessionStorage.getItem("playername");
+      const response = await fetch(
+        `http://${localStorage.getItem("serveradress")}:8080/player/${name}`
+      );
+
+      if (response.data) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.error("Error checking data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPlayerInfo();
+    const intervalId = setInterval(fetchPlayerInfo, refreshInterval);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const fetchPlayerTurn = async () => {
     try {
@@ -175,10 +195,24 @@ const AlarmClock = () => {
   };
 
   return (
-    <div>
-      <h1>Planning</h1>
-      <p>Time remaining: {formatTime(remainingTime)}</p>
-      <p>Reserve Time: {formatTime(reserveTime)}</p>
+    <div
+      style={{
+        fontFamily: "anakotmai",
+        fontSize: "18px",
+        fontWeight: "bold",
+        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
+      }}
+    >
+      <h1 style={{ color: "#FFFF00" }}>Planning : {<getName></getName>}</h1>
+      <p>
+        <span style={{ color: "#A7FFD0" }}>Time remaining</span> :{" "}
+        {formatTime(remainingTime)}
+      </p>
+      <p>
+        {" "}
+        <span style={{ color: "#F9FFC8" }}>Reserve Time</span> :{" "}
+        {formatTime(reserveTime)}
+      </p>
     </div>
   );
 };

@@ -67,13 +67,15 @@ function constructionPlanTab() {
           }}
         ></textarea>
         <button
-          className="bg-lime-500 size-7/12 min-h-12 rounded-2xl transition-all duration-200 transform hover:scale-110 focus:outline-none"
+          className="bg-lime-500 size-7/12 min-h-12 rounded-2xl transition-all duration-200 transform hover:scale-110 hover:shadow-lg focus:outline-none"
           style={{
             color: "black",
             marginLeft: "17%",
             fontFamily: "Anakotmai",
             fontWeight: "bold",
             perspective: "1000px",
+            transitionDuration: "0.4s",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
           }}
         >
           Submit

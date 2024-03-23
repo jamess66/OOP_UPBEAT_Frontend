@@ -133,7 +133,19 @@ function PlayerInfo() {
   return (
     <div>
       <div style={{ width: "95%" }}>
-        <div style={{ paddingBottom: "50px" }}>Players Infomation</div>
+        <div
+          style={{
+            paddingBottom: "30px",
+            paddingTop: "10px",
+            fontFamily: "Anakotmai",
+            fontSize: "24px",
+            fontWeight: "bold",
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          Players Infomation
+        </div>
 
         <Select
           options={allPlayers}
@@ -142,16 +154,68 @@ function PlayerInfo() {
           onChange={handlePlayerChange}
         />
       </div>
-      <div style={{ paddingTop: "30px" }}>
-        Name: {selectedPlayer?.playerName}
+      <div
+        style={{
+          paddingTop: "20px",
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        {" "}
+        <span style={{ color: "#CAF8F4", textShadow: "none" }}>Name</span>:{" "}
+        {selectedPlayer?.playerName}
       </div>
-      <div>Budget: {selectedPlayer?.crewInfo.budget}</div>
-      <div>
-        Current Region: ({selectedPlayer?.crewInfo.currentRegion.x + 1},
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        {" "}
+        <span style={{ color: "#F4FF7A", textShadow: "none" }}>
+          Budget
+        </span>: {selectedPlayer?.crewInfo.budget}
+      </div>
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        {" "}
+        <span style={{ color: "#070303", textShadow: "none" }}>
+          Current Region
+        </span>
+        : ({selectedPlayer?.crewInfo.currentRegion.x + 1},
         {selectedPlayer?.crewInfo.currentRegion.y + 1})
       </div>
-      <div>
-        City Center:{" "}
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        {" "}
+        <span style={{ color: "#070303", textShadow: "none" }}>
+          City Center
+        </span>
+        :{" "}
         {selectedPlayer?.crewInfo.cityCenter
           ? "(" +
             selectedPlayer?.crewInfo.cityCenter.x +
@@ -166,7 +230,21 @@ function PlayerInfo() {
           identifier={selectedPlayer?.identifier}
         ></IdentifierComponent>
       ) : (
-        <div>Identifier: (Secret)</div>
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: "24px",
+            perspective: "1000px",
+            transformStyle: "preserve-3d",
+            transform: "rotateX(30deg)",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <span style={{ color: "skyblue", textShadow: "none" }}>
+            Identifier
+          </span>
+          : (Secret)
+        </div>
       )}
     </div>
   );

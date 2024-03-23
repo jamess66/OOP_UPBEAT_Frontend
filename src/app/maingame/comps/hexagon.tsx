@@ -108,25 +108,76 @@ function Hexagon() {
     const { zoomIn, zoomOut, resetTransform } = useControls();
 
     return (
-      <div>
+      <div
+        style={{
+          marginTop: "10px",
+          marginBottom: "10px",
+          marginLeft: "10px",
+        }}
+      >
         <button
           className="zoomController"
           onClick={() => zoomIn(0.1)}
-          style={{ padding: "5px" }}
+          style={{
+            padding: "5px",
+            backgroundColor: "#8B4513",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            marginRight: "10px",
+            transition: "transform 0.3s",
+            transform: "scale(1)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         >
           Zoom In
         </button>
         <button
           className="zoomController"
           onClick={() => zoomOut(0.1)}
-          style={{ padding: "5px" }}
+          style={{
+            padding: "5px",
+            backgroundColor: "#8B4513",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            marginRight: "10px",
+            transition: "transform 0.3s",
+            transform: "scale(1)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         >
           Zoom Out
         </button>
         <button
           className="zoomController"
           onClick={() => resetTransform(250, "linear")}
-          style={{ padding: "5px" }}
+          style={{
+            padding: "5px",
+            backgroundColor: "#8B4513",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            marginRight: "10px",
+            transition: "transform 0.3s",
+            transform: "scale(1)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         >
           Reset
         </button>
@@ -270,18 +321,3 @@ function Hexagon() {
 }
 
 export default Hexagon;
-
-// {HexGrid.grid[i][j].regionColor != "#ffffff" && (
-//   <img
-//     src={shuffledIcons[j % shuffledIcons.length]}
-//     alt="Player icon"
-//     style={{
-//       position: "absolute",
-//       top: "50%",
-//       left: "50%",
-//       transform: "translate(-50%, -50%)",
-//       width: "40px",
-//       height: "40px",
-//     }}
-//   />
-// )}
