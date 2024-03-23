@@ -9,9 +9,9 @@ function constructionPlanTab() {
   const constructionSubmit = async () => {
     try {
       const response = await axios.put(
-        `http://${localStorage.getItem("serveradress")}:8080/constructionPlan/${sessionStorage.getItem(
-          "playername"
-        )}`,
+        `http://${localStorage.getItem(
+          "serveradress"
+        )}:8080/constructionPlan/${sessionStorage.getItem("playername")}`,
         stringConstructionPlan,
         {
           headers: {
@@ -42,8 +42,20 @@ function constructionPlanTab() {
 
   return (
     <div>
-      <div style={{ paddingBottom: "50px" }}>Construction Plan</div>
-      <form style={{}} onSubmit={handleSubmit}>
+      <div
+        style={{
+          paddingBottom: "30px",
+          paddingTop: "10px",
+          fontFamily: "Anakotmai",
+          fontSize: "20px",
+          fontWeight: "bold",
+          justifyContent: "center",
+          display: "flex",
+        }}
+      >
+        Construction Plan
+      </div>
+      <form style={{ marginLeft: "20px" }} onSubmit={handleSubmit}>
         <textarea
           value={stringConstructionPlan}
           onChange={handleChange}
@@ -55,12 +67,13 @@ function constructionPlanTab() {
           }}
         ></textarea>
         <button
-          className=" bg-lime-500 size-7/12 min-h-12 rounded-2xl  "
+          className="bg-lime-500 size-7/12 min-h-12 rounded-2xl transition-all duration-200 transform hover:scale-110 focus:outline-none"
           style={{
             color: "black",
             marginLeft: "17%",
             fontFamily: "Anakotmai",
             fontWeight: "bold",
+            perspective: "1000px",
           }}
         >
           Submit
