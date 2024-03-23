@@ -6,7 +6,7 @@ import {
   TransformComponent,
   useControls,
 } from "react-zoom-pan-pinch";
-import shuffle from "lodash/shuffle";
+
 import "./hexagon.css";
 import "../style.css";
 
@@ -52,15 +52,9 @@ function Hexagon() {
     cols: 0,
   });
   const [shuffledIcons, setShuffledIcons] = useState<string[]>([]);
-  const [playerIcons, setPlayerIcons] = useState<string[]>([
-    "chess-piece1.png",
-    "chess-piece2.png",
-    "chess-piece3.png",
-    "chess-piece4.png",
-    "chess-piece5.png",
-    "chess-piece6.png",
-    "chess-piece7.png",
-  ]);
+
+  const [playerData, setPlayerData] = useState<PlayerInstance[]>([]);
+
   const fetchTerritory = async () => {
     try {
       const response = await fetch(
@@ -77,23 +71,35 @@ function Hexagon() {
     }
   };
 
+  const fetchPlayers = async () => {
+    try {
+      const response = await fetch(
+        `http://${localStorage.getItem("serveradress")}:8080/players`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setPlayerData(data);
+      } else {
+        console.error("Error fetching player data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching player data:", error);
+    }
+  };
+  console.log(playerData);
+  useEffect(() => {
+    fetchPlayers();
+
+    const intervalId = setInterval(fetchPlayers, refreshInterval);
+    return () => clearInterval(intervalId);
+  }, []);
+
   useEffect(() => {
     fetchTerritory();
 
     const intervalId = setInterval(fetchTerritory, refreshInterval);
     return () => clearInterval(intervalId);
   }, []);
-
-  useEffect(() => {
-    setShuffledIcons(playerIcons);
-  }, []);
-
-  const removePlayerIcon = (playerIconToRemove: string) => {
-    const updatedPlayerIcons = playerIcons.filter(
-      (icon) => icon !== playerIconToRemove
-    );
-    setPlayerIcons(updatedPlayerIcons);
-  };
 
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
@@ -206,20 +212,43 @@ function Hexagon() {
                           ? ""
                           : String(HexGrid.grid[i][j].deposit)}
                       </div>
-                      {HexGrid.grid[i][j].regionColor !== "#ffffff" && (
-                        <img
-                          src={shuffledIcons[j % shuffledIcons.length]}
-                          alt="Player icon"
-                          style={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            width: "40px",
-                            height: "40px",
-                          }}
-                        />
-                      )}
+                      <div>
+                        {playerData.map((player: any) => {
+                          return (
+                            <div>
+                              {player.crewInfo.currentRegion.x == i &&
+                              player.crewInfo.currentRegion.y == j ? (
+                                <img
+                                  src={`./player-${
+                                    player.crewInfo.playerColor.split("#")[1]
+                                  }.png`}
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div>
+                        {playerData.map((player: any) => {
+                          return (
+                            <div>
+                              {player.crewInfo.cityCenter.x == i &&
+                              player.crewInfo.cityCenter.y == j ? (
+                                <img
+                                  src={`./castle-${
+                                    player.crewInfo.playerColor.split("#")[1]
+                                  }.png`}
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   );
                 })}
@@ -233,3 +262,18 @@ function Hexagon() {
 }
 
 export default Hexagon;
+
+// {HexGrid.grid[i][j].regionColor != "#ffffff" && (
+//   <img
+//     src={shuffledIcons[j % shuffledIcons.length]}
+//     alt="Player icon"
+//     style={{
+//       position: "absolute",
+//       top: "50%",
+//       left: "50%",
+//       transform: "translate(-50%, -50%)",
+//       width: "40px",
+//       height: "40px",
+//     }}
+//   />
+// )}
