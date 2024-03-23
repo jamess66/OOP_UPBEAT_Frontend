@@ -32,19 +32,43 @@ function page() {
         style={{
           alignSelf: "flex-start",
           width: "30%",
+          borderRight: "1px solid #83769C",
+          paddingRight: "10px",
         }}
       >
-        <div>
+        <div
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "10px",
+            backgroundColor: "#83769C",
+            borderRadius: "10px",
+          }}
+        >
           <Timer></Timer>
         </div>
-        {sw == 0 ? <ConstructionPlanTab /> : <></>}
+        {sw == 0 ? (
+          <div
+            style={{
+              marginTop: "10px",
+              backgroundColor: "#83769C",
+              borderRadius: "10px",
+              padding: "10px",
+              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+            }}
+          >
+            <ConstructionPlanTab />
+          </div>
+        ) : (
+          <></>
+        )}
         {sw == 1 ? <PlayerInfo /> : <></>}
       </div>
 
-      <div style={{ width: "10%", paddingRight: "100px", paddingleft: "10px" }}>
+      <div style={{ width: "10%", paddingRight: "100px", paddingLeft: "10px" }}>
         <button onClick={handleOnSwap}>
           {sw == 0 ? "Player Info" : ""}
-          {sw == 1 ? "Cinstruction Plan" : ""}
+          {sw == 1 ? "Construction Plan" : ""}
           {sw == 2 ? "Hide" : ""}
         </button>
       </div>

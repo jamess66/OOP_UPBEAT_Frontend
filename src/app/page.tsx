@@ -10,7 +10,7 @@ export default function Home() {
     setIsClickable(false);
     let serverAdress;
     if (!localStorage.getItem("serveradress")) {
-      serverAdress = prompt("Enter server adress.", "192.168.234.183");
+      serverAdress = prompt("Enter server adress.", "192.168.XXX.XXX");
     } else {
       serverAdress = localStorage.getItem("serveradress");
     }
@@ -44,11 +44,15 @@ export default function Home() {
       <Image src="/UPBEATfont.png" alt="Cover" width={800} height={600} />
       <div className=" mt-16">
         <button
-          onClick={handlePlayClick}
+          onClick={async () => {
+            const audio = new Audio("/audio/click-sound.mp3");
+            await audio.play();
+            handlePlayClick();
+          }}
           className="buttonplay"
           disabled={!isClickable}
         >
-          {isClickable ? "Play" : "Loading"}
+          {isClickable ? <strong>Play</strong> : "Loading"}
         </button>
       </div>
     </main>

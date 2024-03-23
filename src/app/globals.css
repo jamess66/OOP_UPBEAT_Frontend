@@ -51,12 +51,32 @@ body {
   width: 300px;
   height: 100px;
 }
+
 .buttonplay:hover {
   background-color: #45a445;
   transform: scale(1.1);
   transition: all 0.5s;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0% {
+    box-shadow: 0 0 10px 5px #62d562;
+  }
+  50% {
+    box-shadow: 0 0 10px 5px transparent;
+  }
+  100% {
+    box-shadow: 0 0 10px 5px #62d562;
+  }
 }
 
 .buttonplay:disabled {
   background-color: #646464;
+}
+
+.buttonplay:not(:hover) {
+  transform: scale(1);
+  transition: all 0.5s;
+  box-shadow: none;
 }
