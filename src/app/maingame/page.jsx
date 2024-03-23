@@ -19,6 +19,7 @@ function page() {
   };
 
   return (
+    
     <div
       style={{
         display: "flex",
