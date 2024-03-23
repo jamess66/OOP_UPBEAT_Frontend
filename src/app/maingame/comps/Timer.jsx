@@ -12,6 +12,8 @@ const AlarmClock = () => {
   const [remainingTime, setRemainingTime] = useState();
   const [reserveTime, setReserveTime] = useState();
 
+  const [player, setPlayer] = useState();
+
   const fetchPlayerTurn = async () => {
     try {
       const response = await fetch(
@@ -31,6 +33,21 @@ const AlarmClock = () => {
     }
   };
 
+  // const fetchPlayerInfo = async () => {
+  //   try {
+  //     const name = sessionStorage.getItem("playername");
+  //     const response = await fetch(
+  //       `http://${localStorage.getItem("serveradress")}:8080/player/${name}`
+  //     );
+
+  //     if (response.data) {
+  //       setPlayer(response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error checking data:", error);
+  //   }
+  // };
+
   const getPlayerTimes = async () => {
     try {
       const response = await axios.get(
@@ -39,6 +56,7 @@ const AlarmClock = () => {
         )}:8080/times/${sessionStorage.getItem("playername")}`
       );
       //console.log(response.data);
+      check();
       if (isPlayerTurn == true) {
         setRemainingTime(response.data.planTime);
       } else {
@@ -52,13 +70,13 @@ const AlarmClock = () => {
     }
   };
 
-  const UpdatePlayerReserveTime = async () => {
+  const UpdatePlayerReserveTime = async (time) => {
     try {
       const response = await axios.put(
         `http://${localStorage.getItem(
           "serveradress"
         )}:8080/updateReserveTime/${sessionStorage.getItem("playername")}`,
-        reserveTime,
+        time,
         {
           headers: {
             "Content-Type": "text/plain",
@@ -97,13 +115,11 @@ const AlarmClock = () => {
         `http://${localStorage.getItem("serveradress")}:8080/player/${name}`
       );
 
-      if (response && response.data) {
-        if (response?.data.crewInfo.cityCenter == null) {
+      if (response.data) {
+        setPlayer(response.data);
+        if (response.data.crewInfo.cityCenter == null) {
           //window.alert("You lose!! Return to main page.");
-          await deletePlayer(name);
           setIsLose(true);
-          //sessionStorage.clear();
-          //window.location.href = "/";
         }
       }
     } catch (error) {
@@ -116,10 +132,42 @@ const AlarmClock = () => {
       const response = await axios.delete(
         `http://${localStorage.getItem(
           "serveradress"
-        )}:8080/removePlayer/${name}`
+        )}:8080/removePlayer/${sessionStorage.getItem("playername")}`
       );
+
+      window.alert("You lose!! Return to main page.");
+      window.location.href = "/";
     } catch (error) {
       console.error("Error fetching player data:", error);
+    }
+  };
+
+  const check = async () => {
+    await checkIsLost();
+    if (isLose) {
+      deletePlayer();
+      sessionStorage.clear();
+    }
+  };
+
+  const outOfTime = async () => {
+    try {
+      const response = await axios.put(
+        `http://${localStorage.getItem(
+          "serveradress"
+        )}:8080/constructionPlan/${sessionStorage.getItem("playername")}`,
+        "OUT-OF_TIME-TURN_END-NOW",
+        {
+          headers: {
+            "Content-Type": "text/plain",
+          },
+        }
+      );
+      check();
+      console.log("out of time");
+      window.alert("Out of Time!! Your turn ended.");
+    } catch (error) {
+      console.error("Error sending data:", error);
     }
   };
 
@@ -127,19 +175,23 @@ const AlarmClock = () => {
     getPlayerTimes();
   }, [isPlayerTurn]);
 
-  checkIsLost();
+  useEffect(() => {
+    check();
+    const intervalId = setInterval(check, refreshInterval);
+    return () => clearInterval(intervalId);
+  });
 
-  if (isLose) {
-    window.alert("You lose!! Return to the main page.");
-    sessionStorage.removeItem("playername");
-    window.location.href = "/";
-  }
+  // useEffect(() => {
+  //   fetchPlayerInfo();
+  //   const intervalId = setInterval(fetchPlayerInfo, refreshInterval);
+  //   return () => clearInterval(intervalId);
+  // });
 
   useEffect(() => {
     fetchPlayerTurn();
     const intervalId = setInterval(fetchPlayerTurn, refreshInterval);
     return () => clearInterval(intervalId);
-  }, []);
+  });
 
   useEffect(() => {
     if (isPlayerTurn === true) {
@@ -155,7 +207,12 @@ const AlarmClock = () => {
       } else {
         const countdownReserveInterval = setInterval(() => {
           setReserveTime((prevReserveTime) => prevReserveTime - 1000);
-          UpdatePlayerReserveTime();
+          UpdatePlayerReserveTime(reserveTime);
+          if (reserveTime <= 0) {
+            UpdatePlayerReserveTime(0);
+            outOfTime();
+            UpdatePlayerReserveTime(0);
+          }
         }, 1000);
 
         return () => {
@@ -166,6 +223,7 @@ const AlarmClock = () => {
   }, [reserveTime, remainingTime, isPlayerTurn]);
 
   const formatTime = (time) => {
+    if (time <= 0) return "00:00";
     const seconds = Math.floor((time / 1000) % 60);
     const minutes = Math.floor((time / 1000 / 60) % 60);
     const hours = Math.floor((time / 1000 / 60 / 60) % 24);
@@ -176,7 +234,20 @@ const AlarmClock = () => {
 
   return (
     <div>
-      <h1>Planning</h1>
+      <span>Player: {player?.playerName}</span>
+      <span>
+        {" "}
+        <div
+          style={{
+            display: "inline-block",
+            width: "20px",
+            height: "20px",
+            transform: "translate(0%, 30%)",
+            background: `${player?.crewInfo.playerColor}`,
+          }}
+        ></div>
+      </span>
+
       <p>Time remaining: {formatTime(remainingTime)}</p>
       <p>Reserve Time: {formatTime(reserveTime)}</p>
     </div>

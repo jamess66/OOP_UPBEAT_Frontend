@@ -154,9 +154,9 @@ function PlayerInfo() {
         City Center:{" "}
         {selectedPlayer?.crewInfo.cityCenter
           ? "(" +
-            selectedPlayer?.crewInfo.cityCenter.x +
+            (selectedPlayer?.crewInfo.cityCenter.x + 1) +
             ", " +
-            selectedPlayer?.crewInfo.cityCenter.y +
+            (selectedPlayer?.crewInfo.cityCenter.y + 1) +
             ")"
           : "(Lost City Center)"}
       </div>

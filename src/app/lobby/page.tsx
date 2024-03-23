@@ -74,7 +74,7 @@ function lobby() {
         </p>
         <ul>
           {players.map((player, index) => (
-            <li key={player.playerName}>
+            <li key={index}>
               <span
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
