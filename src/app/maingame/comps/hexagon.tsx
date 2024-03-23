@@ -194,6 +194,51 @@ function Hexagon() {
                       }}
                       className={"hex-grid-content"}
                     >
+                      <div>
+                        {playerData.map((player: any) => {
+                          return (
+                            <div>
+                              {player.crewInfo.currentRegion.x == i &&
+                              player.crewInfo.currentRegion.y == j ? (
+                                <img
+                                  style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    width: "40px",
+                                    height: "40px",
+                                  }}
+                                  src={`./player-${
+                                    player.crewInfo.playerColor.split("#")[1]
+                                  }.png`}
+                                />
+                              ) : (
+                                ""
+                              )}
+
+                              {player.crewInfo.cityCenter.x == i &&
+                              player.crewInfo.cityCenter.y == j ? (
+                                <img
+                                  style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    width: "40px",
+                                    height: "40px",
+                                  }}
+                                  src={`./castle-${
+                                    player.crewInfo.playerColor.split("#")[1]
+                                  }.png`}
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                       <div
                         style={{
                           position: "relative",
@@ -211,43 +256,6 @@ function Hexagon() {
                         {HexGrid.grid[i][j].regionColor === "#ffffff"
                           ? ""
                           : String(HexGrid.grid[i][j].deposit)}
-                      </div>
-                      <div>
-                        {playerData.map((player: any) => {
-                          return (
-                            <div>
-                              {player.crewInfo.currentRegion.x == i &&
-                              player.crewInfo.currentRegion.y == j ? (
-                                <img
-                                  src={`./player-${
-                                    player.crewInfo.playerColor.split("#")[1]
-                                  }.png`}
-                                />
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      <div>
-                        {playerData.map((player: any) => {
-                          return (
-                            <div>
-                              {player.crewInfo.cityCenter.x == i &&
-                              player.crewInfo.cityCenter.y == j ? (
-                                <img
-                                  src={`./castle-${
-                                    player.crewInfo.playerColor.split("#")[1]
-                                  }.png`}
-                                />
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          );
-                        })}
                       </div>
                     </div>
                   );
