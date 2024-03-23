@@ -6,10 +6,6 @@ import {
   TransformComponent,
   useControls,
 } from "react-zoom-pan-pinch";
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 import "./hexagon.css";
 import "../style.css";
 
@@ -54,16 +50,15 @@ function Hexagon() {
     rows: 0,
     cols: 0,
   });
-<<<<<<< Updated upstream
-=======
   const [shuffledIcons, setShuffledIcons] = useState<string[]>([]);
 
   const [playerData, setPlayerData] = useState<PlayerInstance[]>([]);
->>>>>>> Stashed changes
 
   const fetchTerritory = async () => {
     try {
-      const response = await fetch(`http://${localStorage.getItem("serveradress")}:8080/territory`);
+      const response = await fetch(
+        `http://${localStorage.getItem("serveradress")}:8080/territory`
+      );
       if (response.ok) {
         const data: HexGrid = await response.json();
         setHexGrid(data);
@@ -75,18 +70,6 @@ function Hexagon() {
     }
   };
 
-<<<<<<< Updated upstream
-
-
-  useEffect(() => {
-    fetchTerritory();
-    const intervalId = setInterval(fetchTerritory, refreshInterval);
-    return () => clearInterval(intervalId);
-  }, []);
-
-
-
-=======
   const fetchPlayers = async () => {
     try {
       const response = await fetch(
@@ -116,7 +99,6 @@ function Hexagon() {
     return () => clearInterval(intervalId);
   }, []);
 
->>>>>>> Stashed changes
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
 
@@ -228,8 +210,6 @@ function Hexagon() {
                           ? ""
                           : String(HexGrid.grid[i][j].deposit)}
                       </div>
-<<<<<<< Updated upstream
-=======
                       <div>
                         {playerData.map((player: any) => {
                           return (
@@ -267,7 +247,6 @@ function Hexagon() {
                           );
                         })}
                       </div>
->>>>>>> Stashed changes
                     </div>
                   );
                 })}
