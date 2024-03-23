@@ -32,7 +32,7 @@ interface PlayerInstance {
 interface crewInfo {
   playerColor: string;
   buget: number;
-  citycenter: HexRegion;
+  cityCenter: HexRegion;
   currentRegion: HexRegion;
 }
 
@@ -51,7 +51,6 @@ function Hexagon() {
     rows: 0,
     cols: 0,
   });
-  const [shuffledIcons, setShuffledIcons] = useState<string[]>([]);
 
   const [playerData, setPlayerData] = useState<PlayerInstance[]>([]);
 
@@ -100,6 +99,20 @@ function Hexagon() {
     const intervalId = setInterval(fetchTerritory, refreshInterval);
     return () => clearInterval(intervalId);
   }, []);
+
+  const isCityCenter = (
+    players: PlayerInstance[],
+    i: number,
+    j: number
+  ) => {
+    let isCC = false;
+    players.forEach((p) => {
+      if (p.crewInfo.cityCenter?.x == i && p.crewInfo.cityCenter?.y == j)
+        isCC = true;
+    });
+
+    return isCC;
+  };
 
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
@@ -246,40 +259,40 @@ function Hexagon() {
                       className={"hex-grid-content"}
                     >
                       <div>
-                        {playerData.map((player: any) => {
+                        {playerData.map((player: any, index) => {
                           return (
-                            <div>
-                              {player.crewInfo.currentRegion.x == i &&
-                              player.crewInfo.currentRegion.y == j ? (
+                            <div key={index}>
+                              {player.crewInfo.cityCenter?.x == i &&
+                              player.crewInfo.cityCenter?.y == j ? (
                                 <img
                                   style={{
                                     position: "absolute",
                                     top: "50%",
                                     left: "50%",
-                                    transform: "translate(-50%, -50%)",
-                                    width: "40px",
-                                    height: "40px",
-                                  }}
-                                  src={`./player-${
-                                    player.crewInfo.playerColor.split("#")[1]
-                                  }.png`}
-                                />
-                              ) : (
-                                ""
-                              )}
-
-                              {player.crewInfo.cityCenter.x == i &&
-                              player.crewInfo.cityCenter.y == j ? (
-                                <img
-                                  style={{
-                                    position: "absolute",
-                                    top: "50%",
-                                    left: "50%",
-                                    transform: "translate(-50%, -50%)",
+                                    transform: "translate(-50%, -30%)",
                                     width: "40px",
                                     height: "40px",
                                   }}
                                   src={`./castle-${
+                                    player.crewInfo.playerColor.split("#")[1]
+                                  }.png`}
+                                />
+                              ) : (
+                                <></>
+                              )}
+
+                              {player.crewInfo.currentRegion?.x == i &&
+                              player.crewInfo.currentRegion?.y == j ? (
+                                <img
+                                  style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -43%)",
+                                    width: "40px",
+                                    height: "35px",
+                                  }}
+                                  src={`./player-${
                                     player.crewInfo.playerColor.split("#")[1]
                                   }.png`}
                                 />
@@ -299,7 +312,11 @@ function Hexagon() {
 
                           fontSize: "16px",
                           alignItems: "center",
-                          transform: `translate(-50%, -50%)`,
+                          transform: `translate(-50%, -${
+                            isCityCenter(playerData, i, j)
+                              ? `110`
+                              : `50`
+                          }%)`,
                           top: "50%",
                           left: "50%",
                         }}
