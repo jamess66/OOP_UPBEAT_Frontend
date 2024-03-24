@@ -231,7 +231,7 @@ function Hexagon() {
       style={{
         width: `${gridWidth}px`,
         height: `${gridHeight + 100}px`,
-        overflow: "auto",
+        // overflow: "auto",
         // border: "5px solid #ff9646",
         // borderRadius: "20px",
       }}
@@ -239,7 +239,7 @@ function Hexagon() {
       <TransformWrapper>
         <Controls />
         <TransformComponent>
-          <div style={{ marginLeft: "40px" }}>
+          <div style={{ marginLeft: "60px" }}>
             {arr2.map((data, i) => {
               return (
                 <div

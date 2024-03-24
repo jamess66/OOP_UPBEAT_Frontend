@@ -34,9 +34,9 @@ function page() {
         style={{
           alignSelf: "flex-start",
           width: "30%",
-          borderRight: "1px solid #83769C",
+          // borderRight: "1px solid #83769C",
           paddingRight: "10px",
-          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+          // boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
         }}
       >
         <div
@@ -44,7 +44,7 @@ function page() {
             alignItems: "center",
             justifyContent: "center",
             padding: "10px",
-            backgroundColor: "#83769C",
+            backgroundColor: "#6D5A92",
             borderRadius: "10px",
             boxShadow: "0px 0px px rgba(255, 255, 255, 0.5)",
           }}
@@ -55,7 +55,7 @@ function page() {
           <div
             style={{
               marginTop: "10px",
-              backgroundColor: "#83769C",
+              backgroundColor: "#6D5A92",
               borderRadius: "10px",
               padding: "10px",
               boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
@@ -100,25 +100,14 @@ function page() {
             fontFamily: "MadimiOne",
           }}
           onClick={handleOnSwap}
-          onMouseEnter={(e) => {
-            // e.target.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.8)";
-            e.target.style.transform = "scale(1.05)";
-            e.target.style.backgroundColor = "#FFCCAA";
-            // e.target.style.color = "#000000";
-          }}
-          onMouseLeave={(e) => {
-            // e.target.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.5)";
-            // e.target.style.transform = "scale(1)";
-            e.target.style.backgroundColor = "#83769C";
-            // e.target.style.color = "#f4f4f4f4";
-          }}
         >
           {sw === 0 ? (
             <img
               src="people.png"
               style={{
-                height: "30px",
-                width: "30px",
+                height: "25px",
+                width: "25px",
+                transform: "translate(50%, 2%)",
               }}
             ></img>
           ) : (
@@ -130,6 +119,7 @@ function page() {
               style={{
                 height: "30px",
                 width: "30px",
+                transform: "translate(33%, 2%)",
               }}
             ></img>
           ) : (
@@ -144,8 +134,8 @@ function page() {
           style={{
             marginLeft: "center",
             marginRight: "center",
-            width: "100%",
-            backgroundColor: "#83769C",
+            width: "108%",
+            backgroundColor: "#6D5A92",
             borderRadius: "10px",
             padding: "10px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",

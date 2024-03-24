@@ -73,43 +73,52 @@ function lobby() {
         >
           LOBBY
         </p>
-        <ul>
-          {players.map((player, index) => (
-            <li key={player.playerName}>
-              <span
-                style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
-                  fontFamily: "MadimiOne",
-                }}
-              >
-                {player.playerName}
-              </span>
-              {player.playerName === sessionStorage.getItem("playername") && (
+        <div
+          style={{
+            overflowY: "scroll",
+            maxHeight: "630px",
+            marginLeft: "23px",
+            overflowX: "scroll",
+          }}
+        >
+          <ul>
+            {players.map((player, index) => (
+              <li key={player.playerName}>
                 <span
                   style={{
-                    color: "lightgreen",
-                    fontWeight: "bold",
-                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.35)",
+                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
+                    fontFamily: "MadimiOne",
                   }}
                 >
-                  {" "}
-                  (You)
+                  {player.playerName}
                 </span>
-              )}
-              {index !== players.length - 1 && (
-                <hr
-                  style={{
-                    borderColor: "lightgray",
-                    borderStyle: "solid",
-                    width: "80%",
-                    margin: "10px auto",
-                  }}
-                />
-              )}
-            </li>
-          ))}
-        </ul>
-        <div>
+                {player.playerName === sessionStorage.getItem("playername") && (
+                  <span
+                    style={{
+                      color: "lightgreen",
+                      fontWeight: "bold",
+                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.35)",
+                    }}
+                  >
+                    {" "}
+                    (You)
+                  </span>
+                )}
+                {index !== players.length - 1 && (
+                  <hr
+                    style={{
+                      borderColor: "lightgray",
+                      borderStyle: "solid",
+                      width: "80%",
+                      margin: "10px auto",
+                    }}
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <span>
           <button
             className="button"
             onClick={handleJoin}
@@ -117,7 +126,7 @@ function lobby() {
           >
             Start
           </button>
-        </div>
+        </span>
       </div>
     </header>
   );
