@@ -32,7 +32,6 @@ function constructionPlanTab() {
       /[^A-Za-z0-9+\-*/{}()^=#\s]/g,
       ""
     );
-    sessionStorage.setItem("constructionPlan", stringConstructionPlan);
     setStringConstructionPlan(sanitizedValue);
   };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -46,6 +45,10 @@ function constructionPlanTab() {
       setStringConstructionPlan(a);
     }
   }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("constructionPlan", stringConstructionPlan);
+  });
   return (
     <div>
       <div

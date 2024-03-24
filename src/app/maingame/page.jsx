@@ -37,6 +37,7 @@ function page() {
           // borderRight: "1px solid #83769C",
           paddingRight: "10px",
           // boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+          marginTop: "35px",
         }}
       >
         <div
@@ -98,6 +99,7 @@ function page() {
             width: "50px",
             height: "50px",
             fontFamily: "MadimiOne",
+            marginTop: "35px",
           }}
           onClick={handleOnSwap}
         >
