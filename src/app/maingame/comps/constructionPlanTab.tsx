@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 
 import "./constructionplan.css";
@@ -32,6 +32,7 @@ function constructionPlanTab() {
       /[^A-Za-z0-9+\-*/{}()^=#\s]/g,
       ""
     );
+    sessionStorage.setItem("constructionPlan", stringConstructionPlan);
     setStringConstructionPlan(sanitizedValue);
   };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -39,7 +40,12 @@ function constructionPlanTab() {
     console.log(stringConstructionPlan);
     constructionSubmit();
   };
-
+  useEffect(() => {
+    const a = sessionStorage.getItem("constructionPlan");
+    if (a) {
+      setStringConstructionPlan(a);
+    }
+  }, []);
   return (
     <div>
       <div
