@@ -12,14 +12,16 @@ function IdentifierComponent({ identifier }) {
         textShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
       }}
     >
-      <h2>Identifier:</h2>
-      <div>
-        {propertyNames.map((propertyName) => (
-          <div key={propertyName} style={{ paddingLeft: "30px" }}>
-            {propertyName}: {identifier[propertyName]}
-          </div>
-        ))}
-      </div>
+      <span>Identifier:</span>
+      <span>
+        {propertyNames == []
+          ? propertyNames.map((propertyName) => (
+              <div key={propertyName} style={{ paddingLeft: "30px" }}>
+                {propertyName}: {identifier[propertyName]}
+              </div>
+            ))
+          : " Not assign yet."}
+      </span>
     </div>
   );
 }
