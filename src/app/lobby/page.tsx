@@ -75,10 +75,11 @@ function lobby() {
         </p>
         <div
           style={{
-            overflowY: "scroll",
+            // overflowY: "scroll",
             maxHeight: "630px",
             marginLeft: "23px",
-            overflowX: "scroll",
+            // overflowX: "scroll",
+            overflow: "auto",
           }}
         >
           <ul>
@@ -118,15 +119,18 @@ function lobby() {
             ))}
           </ul>
         </div>
-        <span>
-          <button
-            className="button"
-            onClick={handleJoin}
-            style={{ fontFamily: "MadimiOne" }}
-          >
-            Start
-          </button>
-        </span>
+        <button
+          className="button"
+          onClick={handleJoin}
+          style={{
+            fontFamily: "MadimiOne",
+            position: "absolute",
+            marginLeft: "-93px",
+            marginTop: "15px",
+          }}
+        >
+          Start
+        </button>
       </div>
     </header>
   );

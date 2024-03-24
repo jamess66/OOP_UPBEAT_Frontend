@@ -70,7 +70,7 @@ function page() {
           <div
             style={{
               marginTop: "10px",
-              backgroundColor: "#83769C",
+              backgroundColor: "#6D5A92",
               borderRadius: "10px",
               padding: "10px",
               boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
@@ -87,7 +87,7 @@ function page() {
         <button
           style={{
             borderRadius: "10px",
-            backgroundColor: "#83769C",
+            backgroundColor: "#6D5A92",
             color: "#f4f4f4f4",
             fontWeight: "bold",
             fontSize: "16px",
