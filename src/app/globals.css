@@ -9,7 +9,6 @@
   /* background-image: url("/Rectangle7.png"); */
   background-color: #112a46;
   height: 100vh;
-  background-size: cover;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,6 +37,7 @@ body {
 
 .background {
   /* background-image: url("/Rectangle7.png"); */
+
   background-color: #112a46;
   height: 100vh;
   background-size: cover;

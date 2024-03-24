@@ -55,22 +55,28 @@ function playergame() {
       e.preventDefault();
       return;
     }
-    sessionStorage.setItem("playername", username);
     createPlayer();
   };
 
   const createPlayer = async () => {
-    console.log(username);
     try {
-      const res = await axios.post(
+      const res: any = await axios.post(
         `http://${localStorage.getItem("serveradress")}:8080/player`,
         username
       );
+      const data = res.data;
+      if (data.playerName != "" && data.crewInfo != null) {
+        window.location.href = "/lobby";
+        sessionStorage.setItem("playername", username);
+      } else {
+        window.alert("Room is full!!! Going back to start menu.");
+        window.location.href = "/";
+      }
     } catch (error) {
       console.log("Error posting username", error);
     }
+    return false;
   };
-
   return (
     <header className="background">
       <div className="boderuser">
@@ -91,15 +97,13 @@ function playergame() {
             </p>
           )}
           <div>
-            <a href="/lobby">
-              <button
-                className="buttonjoin"
-                value="Submit"
-                onClick={handleSubmit}
-              >
-                Join
-              </button>
-            </a>
+            <button
+              className="buttonjoin"
+              value="Submit"
+              onClick={handleSubmit}
+            >
+              Join
+            </button>
           </div>
           <div>
             <Link href="/">

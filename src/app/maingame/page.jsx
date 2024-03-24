@@ -123,7 +123,7 @@ function page() {
           style={{
             marginLeft: "center",
             marginRight: "center",
-            width: "83%",
+            width: "100%",
             backgroundColor: "#83769C",
             borderRadius: "10px",
             padding: "10px",

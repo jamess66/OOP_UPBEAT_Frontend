@@ -106,7 +106,35 @@ function PlayerInfo() {
 
   const colourStyles = {
     control: (styles) => {
-      return { ...styles, backgroundColor: `white` };
+      const playerColor = selectedPlayer
+        ? selectedPlayer.crewInfo.playerColor
+        : "#ffffff";
+      return {
+        ...styles,
+        backgroundColor: `${playerColor}`,
+        color: `${setContrastText(playerColor)}`,
+        border: "5px",
+      };
+    },
+    placeholder: (styles, { data }) => {
+      const playerColor = selectedPlayer
+        ? selectedPlayer.crewInfo.playerColor
+        : "#ffffff";
+      return {
+        ...styles,
+        ...dot(`${playerColor}`),
+        color: setContrastText(playerColor),
+      };
+    },
+    singleValue: (styles, { data }) => {
+      const playerColor = selectedPlayer
+        ? selectedPlayer.crewInfo.playerColor
+        : "#ffffff";
+      return {
+        ...styles,
+        ...dot(data.value.crewInfo.playerColor),
+        color: setContrastText(playerColor),
+      };
     },
     option: (styles, { data }) => {
       const playerColor = data.value.crewInfo.playerColor;
@@ -117,17 +145,19 @@ function PlayerInfo() {
       };
     },
 
+    menu: (styles) => ({
+      ...styles,
+      backgroundColor: "#112a46",
+      color: setContrastText("#112a46"),
+    }),
+
+    noOptionsMessage: (styles) => ({
+      ...styles,
+      backgroundColor: "#112a46",
+      color: setContrastText("#112a46"),
+    }),
+
     input: (styles) => ({ ...styles, ...dot() }),
-    placeholder: (styles) => ({
-      ...styles,
-      ...dot(
-        `${selectedPlayer ? selectedPlayer.crewInfo.playerColor : "%ccc"}`
-      ),
-    }),
-    singleValue: (styles, { data }) => ({
-      ...styles,
-      ...dot(data.value.crewInfo.playerColor),
-    }),
   };
 
   return (
@@ -135,24 +165,36 @@ function PlayerInfo() {
       <div style={{ width: "95%" }}>
         <div
           style={{
-            paddingBottom: "30px",
-            paddingTop: "10px",
+            paddingBottom: "5px",
+            marginTop: "5px",
+            paddingTop: "5px",
+            marginBottom: "15px",
             fontFamily: "Anakotmai",
             fontSize: "24px",
             fontWeight: "bold",
             justifyContent: "center",
             display: "flex",
+            borderRadius: "10px",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
           }}
         >
           Players Infomation
         </div>
-
-        <Select
-          options={allPlayers}
-          styles={colourStyles}
-          placeholder={allPlayers[currentPlayerIndex]?.label + ""}
-          onChange={handlePlayerChange}
-        />
+        <div
+          style={{
+            boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.2)",
+            borderRadius: "20px",
+          }}
+        >
+          {" "}
+          <Select
+            options={allPlayers}
+            styles={colourStyles}
+            placeholder={allPlayers[currentPlayerIndex]?.label + ""}
+            onChange={handlePlayerChange}
+          />
+        </div>
       </div>
       <div
         style={{

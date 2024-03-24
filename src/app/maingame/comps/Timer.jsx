@@ -255,12 +255,21 @@ const AlarmClock = () => {
         fontFamily: "anakotmai",
         fontSize: "18px",
         fontWeight: "bold",
-        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
+        color: "whitesmoke",
+        textShadow: "2px 4px 3px rgba(0, 0, 0, 0.25)",
       }}
     >
       <div>
-        <span style={{ color: `${player?.crewInfo.playerColor}` }}>
-          Player: {player?.playerName}
+        <span>
+          <span style={{ color: "whitesmoke" }}>Player:</span>{" "}
+          <span
+            style={{
+              color: `${player?.crewInfo.playerColor}`,
+              textShadow: " 1px 1px 3px rgba(0, 0, 0, 0.4)",
+            }}
+          >
+            {player?.playerName}
+          </span>
         </span>
         <span>
           {" "}
@@ -269,16 +278,28 @@ const AlarmClock = () => {
               display: "inline-block",
               width: "20px",
               height: "20px",
+
               borderRadius: "5px",
-              transform: "translate(0%, 30%)",
+              transform: "translate(30%, 20%)",
+              boxShadow: "1px 1px 2px rgba(0, 0, 0, 0.9)",
               background: `${player?.crewInfo.playerColor}`,
             }}
           ></div>
         </span>
       </div>
       <div>
-        <span style={{ color: `${currentTurnPlayer?.crewInfo.playerColor}` }}>
-          Current Turn: {currentTurnPlayer?.playerName}
+        <span>
+          <span style={{ color: "#B7FEEE" }}>Current Turn:</span>{" "}
+          <span
+            style={{
+              color: `${currentTurnPlayer?.crewInfo.playerColor}`,
+              textShadow: " 1px 1px 3px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            {currentTurnPlayer?.playerName == player?.playerName
+              ? "Your Turn"
+              : currentTurnPlayer?.playerName}
+          </span>
         </span>
         <span>
           {" "}
@@ -288,7 +309,8 @@ const AlarmClock = () => {
               width: "20px",
               height: "20px",
               borderRadius: "5px",
-              transform: "translate(0%, 30%)",
+              transform: "translate(30%, 20%)",
+              boxShadow: "1px 1px 2px rgba(0, 0, 0, 0.9)",
               background: `${currentTurnPlayer?.crewInfo.playerColor}`,
             }}
           ></div>
