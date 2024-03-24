@@ -48,7 +48,7 @@ function constructionPlanTab() {
           marginTop: "5px",
           paddingTop: "5px",
           marginBottom: "10px",
-          fontFamily: "Anakotmai",
+          fontFamily: "MadimiOne",
           fontSize: "20px",
           fontWeight: "bold",
           paddingRight: "35px",
@@ -71,6 +71,7 @@ function constructionPlanTab() {
             resize: "none",
             width: "95%",
             // height: "400px",
+            fontFamily: "MadimiOne",
           }}
         ></textarea>
         <button
@@ -78,7 +79,7 @@ function constructionPlanTab() {
           style={{
             color: "black",
             marginLeft: "26%",
-            fontFamily: "Anakotmai",
+            fontFamily: "MadimiOne",
             fontWeight: "bold",
             perspective: "1000px",
             transitionDuration: "0.4s",

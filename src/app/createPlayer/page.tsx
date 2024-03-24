@@ -80,7 +80,10 @@ function playergame() {
   return (
     <header className="background">
       <div className="boderuser">
-        <div className="component-setplayergame-front">
+        <div
+          className="component-setplayergame-front"
+          style={{ fontFamily: "MadimiOne" }}
+        >
           USERNAME
           <form>
             <input

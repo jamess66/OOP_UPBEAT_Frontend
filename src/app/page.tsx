@@ -2,6 +2,7 @@
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import "../app/globals.css";
 
 export default function Home() {
   const [isClickable, setIsClickable] = useState(true);
@@ -49,6 +50,7 @@ export default function Home() {
             await audio.play();
             handlePlayClick();
           }}
+          style={{ fontFamily: "MadimiOne" }}
           className="buttonplay"
           disabled={!isClickable}
         >

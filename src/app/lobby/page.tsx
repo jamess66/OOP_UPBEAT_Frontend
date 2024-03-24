@@ -68,6 +68,7 @@ function lobby() {
             fontSize: "bold",
             fontWeight: "bold",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontFamily: "MadimiOne",
           }}
         >
           LOBBY
@@ -78,6 +79,7 @@ function lobby() {
               <span
                 style={{
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
+                  fontFamily: "MadimiOne",
                 }}
               >
                 {player.playerName}
@@ -108,7 +110,11 @@ function lobby() {
           ))}
         </ul>
         <div>
-          <button className="button" onClick={handleJoin}>
+          <button
+            className="button"
+            onClick={handleJoin}
+            style={{ fontFamily: "MadimiOne" }}
+          >
             Start
           </button>
         </div>

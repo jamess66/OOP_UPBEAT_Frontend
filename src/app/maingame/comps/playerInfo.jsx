@@ -169,7 +169,7 @@ function PlayerInfo() {
             marginTop: "5px",
             paddingTop: "5px",
             marginBottom: "15px",
-            fontFamily: "Anakotmai",
+            fontFamily: "MadimiOne",
             fontSize: "24px",
             fontWeight: "bold",
             justifyContent: "center",
@@ -188,12 +188,15 @@ function PlayerInfo() {
           }}
         >
           {" "}
-          <Select
-            options={allPlayers}
-            styles={colourStyles}
-            placeholder={allPlayers[currentPlayerIndex]?.label + ""}
-            onChange={handlePlayerChange}
-          />
+          <span style={{ fontFamily: "MadimiOne", fontSize: "18px " }}>
+            {" "}
+            <Select
+              options={allPlayers}
+              styles={colourStyles}
+              placeholder={allPlayers[currentPlayerIndex]?.label + ""}
+              onChange={handlePlayerChange}
+            />
+          </span>
         </div>
       </div>
       <div
@@ -208,40 +211,15 @@ function PlayerInfo() {
         }}
       >
         {" "}
-        <span style={{ color: "#CAF8F4", textShadow: "none" }}>Name</span>:{" "}
-        {selectedPlayer?.playerName}
-      </div>
-      <div
-        style={{
-          fontWeight: "bold",
-          fontSize: "24px",
-          perspective: "1000px",
-          transformStyle: "preserve-3d",
-          transform: "rotateX(30deg)",
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-        }}
-      >
-        {" "}
-        <span style={{ color: "#F4FF7A", textShadow: "none" }}>
-          Budget
-        </span>: {selectedPlayer?.crewInfo.budget}
-      </div>
-      <div
-        style={{
-          fontWeight: "bold",
-          fontSize: "24px",
-          perspective: "1000px",
-          transformStyle: "preserve-3d",
-          transform: "rotateX(30deg)",
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-        }}
-      >
-        {" "}
-        <span style={{ color: "#070303", textShadow: "none" }}>
-          Current Region
+        <span
+          style={{
+            color: "#CAF8F4",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontFamily: "MadimiOne",
+          }}
+        >
+          Name : {selectedPlayer?.playerName}
         </span>
-        : ({selectedPlayer?.crewInfo.currentRegion.x + 1},
-        {selectedPlayer?.crewInfo.currentRegion.y + 1})
       </div>
       <div
         style={{
@@ -251,20 +229,69 @@ function PlayerInfo() {
           transformStyle: "preserve-3d",
           transform: "rotateX(30deg)",
           textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          fontFamily: "MadimiOne",
         }}
       >
         {" "}
-        <span style={{ color: "#070303", textShadow: "none" }}>
-          City Center
+        <span
+          style={{
+            color: "#F4FF7A",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontFamily: "MadimiOne",
+          }}
+        >
+          Budget : {selectedPlayer?.crewInfo.budget}
         </span>
-        :{" "}
-        {selectedPlayer?.crewInfo.cityCenter
-          ? "(" +
-            selectedPlayer?.crewInfo.cityCenter.x +
-            ", " +
-            selectedPlayer?.crewInfo.cityCenter.y +
-            ")"
-          : "(Lost City Center)"}
+      </div>
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0)",
+          fontFamily: "MadimiOne",
+        }}
+      >
+        {" "}
+        <span
+          style={{
+            color: "#070303",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          Current Region : ({selectedPlayer?.crewInfo.currentRegion.x + 1},
+          {selectedPlayer?.crewInfo.currentRegion.y + 1})
+        </span>
+      </div>
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          fontFamily: "MadimiOne",
+        }}
+      >
+        {" "}
+        <span
+          style={{
+            color: "#070303",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0)",
+          }}
+        >
+          City Center :{" "}
+          {selectedPlayer?.crewInfo.cityCenter
+            ? "(" +
+              selectedPlayer?.crewInfo.cityCenter.x +
+              ", " +
+              selectedPlayer?.crewInfo.cityCenter.y +
+              ")"
+            : "(Lost City Center)"}
+        </span>
       </div>
 
       {selectedPlayer?.playerName == sessionStorage.getItem("playername") ? (
@@ -282,10 +309,15 @@ function PlayerInfo() {
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
           }}
         >
-          <span style={{ color: "skyblue", textShadow: "none" }}>
-            Identifier
+          <span
+            style={{
+              color: "skyblue",
+              fontFamily: "MadimiOne",
+              textShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            Identifier : (Secret)
           </span>
-          : (Secret)
         </div>
       )}
     </div>

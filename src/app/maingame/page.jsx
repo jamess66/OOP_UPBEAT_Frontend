@@ -95,25 +95,46 @@ function page() {
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
             transition: "box-shadow 0.3s, transform 0.3s",
             transform: "scale(1)",
-            width: "300%",
+            width: "50px",
             height: "50px",
+            fontFamily: "MadimiOne",
           }}
           onClick={handleOnSwap}
           onMouseEnter={(e) => {
-            e.target.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.8)";
+            // e.target.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.8)";
             e.target.style.transform = "scale(1.05)";
             e.target.style.backgroundColor = "#FFCCAA";
-            e.target.style.color = "#000000";
+            // e.target.style.color = "#000000";
           }}
           onMouseLeave={(e) => {
-            e.target.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.5)";
-            e.target.style.transform = "scale(1)";
+            // e.target.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.5)";
+            // e.target.style.transform = "scale(1)";
             e.target.style.backgroundColor = "#83769C";
-            e.target.style.color = "#f4f4f4f4";
+            // e.target.style.color = "#f4f4f4f4";
           }}
         >
-          {sw === 0 ? "Player Info" : ""}
-          {sw === 1 ? "Construction Plan" : ""}
+          {sw === 0 ? (
+            <img
+              src="people.png"
+              style={{
+                height: "30px",
+                width: "30px",
+              }}
+            ></img>
+          ) : (
+            ""
+          )}
+          {sw === 1 ? (
+            <img
+              src="terminal.png"
+              style={{
+                height: "30px",
+                width: "30px",
+              }}
+            ></img>
+          ) : (
+            ""
+          )}
           {sw === 2 ? "Hide" : ""}
         </button>
       </div>
@@ -135,7 +156,7 @@ function page() {
         >
           <p
             style={{
-              fontFamily: "anakotmai",
+              fontFamily: "MadimiOne",
               fontSize: "24px",
               fontWeight: "bold",
             }}

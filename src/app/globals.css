@@ -27,6 +27,8 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+
+  font-family: "Madimi One";
 }
 
 @layer utilities {
@@ -79,4 +81,9 @@ body {
   transform: scale(1);
   transition: all 0.5s;
   box-shadow: none;
+}
+
+@font-face {
+  font-family: "MadimiOne";
+  src: url("./MadimiOne-Regular.ttf");
 }

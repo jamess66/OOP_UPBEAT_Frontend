@@ -252,7 +252,7 @@ const AlarmClock = () => {
   return (
     <div
       style={{
-        fontFamily: "anakotmai",
+        fontFamily: "MadimiOne",
         fontSize: "18px",
         fontWeight: "bold",
         color: "whitesmoke",

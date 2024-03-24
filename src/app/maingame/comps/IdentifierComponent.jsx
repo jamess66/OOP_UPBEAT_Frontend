@@ -5,7 +5,13 @@ function IdentifierComponent({ identifier }) {
 
   console.log(propertyNames);
   return (
-    <div>
+    <div
+      style={{
+        fontFamily: "MadimiOne",
+        fontSize: "22px",
+        textShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+      }}
+    >
       <h2>Identifier:</h2>
       <div>
         {propertyNames.map((propertyName) => (

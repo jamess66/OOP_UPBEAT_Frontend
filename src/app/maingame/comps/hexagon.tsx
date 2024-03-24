@@ -105,6 +105,11 @@ function Hexagon() {
     players.forEach((p) => {
       if (p.crewInfo.cityCenter?.x == i && p.crewInfo.cityCenter?.y == j)
         isCC = true;
+      else if (
+        p.crewInfo.currentRegion?.x == i &&
+        p.crewInfo.currentRegion?.y == j
+      )
+        isCC = true;
     });
 
     return isCC;
@@ -136,6 +141,7 @@ function Hexagon() {
             marginRight: "10px",
             transition: "transform 0.3s",
             transform: "scale(1)",
+            fontFamily: "MadimiOne",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "scale(1.2)";
@@ -158,6 +164,7 @@ function Hexagon() {
             marginRight: "10px",
             transition: "transform 0.3s",
             transform: "scale(1)",
+            fontFamily: "MadimiOne",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "scale(1.2)";
@@ -180,6 +187,7 @@ function Hexagon() {
             marginRight: "10px",
             transition: "transform 0.3s",
             transform: "scale(1)",
+            fontFamily: "MadimiOne",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "scale(1.2)";
@@ -277,7 +285,25 @@ function Hexagon() {
                                 ) : (
                                   <></>
                                 )}
-
+                                {/* add camp for each player */}
+                                {HexGrid.grid[i][j].regionColor !== "#ffffff" &&
+                                !isCityCenter(playerData, i, j) ? (
+                                  <img
+                                    style={{
+                                      position: "absolute",
+                                      top: "50%",
+                                      left: "50%",
+                                      transform: "translate(-50%, -25%)",
+                                      width: "30px",
+                                      height: "30px",
+                                    }}
+                                    src={`./camp-${
+                                      player.crewInfo.playerColor.split("#")[1]
+                                    }.png`}
+                                  />
+                                ) : (
+                                  ""
+                                )}
                                 {player.crewInfo.currentRegion?.x == i &&
                                 player.crewInfo.currentRegion?.y == j ? (
                                   <img
@@ -285,7 +311,7 @@ function Hexagon() {
                                       position: "absolute",
                                       top: "50%",
                                       left: "50%",
-                                      transform: "translate(-50%, -20%)",
+                                      transform: "translate(-50%, -25%)",
                                       width: "30px",
                                       height: "30px",
                                     }}
@@ -306,8 +332,9 @@ function Hexagon() {
                             color: `${setContrastText(
                               HexGrid.grid[i][j].regionColor
                             )}`,
+                            fontFamily: "MadimiOne",
 
-                            fontSize: "16px",
+                            fontSize: "15px",
                             alignItems: "center",
                             transform: `translate(-50%, -${
                               isCityCenter(playerData, i, j) ? `110` : `50`
