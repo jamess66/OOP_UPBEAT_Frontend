@@ -14,7 +14,7 @@ function IdentifierComponent({ identifier }) {
     >
       <span>Identifier:</span>
       <span>
-        {propertyNames == []
+        {propertyNames.length > 0
           ? propertyNames.map((propertyName) => (
               <div key={propertyName} style={{ paddingLeft: "30px" }}>
                 {propertyName}: {identifier[propertyName]}

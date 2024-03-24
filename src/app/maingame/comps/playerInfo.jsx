@@ -159,7 +159,6 @@ function PlayerInfo() {
 
     input: (styles) => ({ ...styles, ...dot() }),
   };
-
   return (
     <div>
       <div style={{ width: "95%" }}>
@@ -295,9 +294,11 @@ function PlayerInfo() {
       </div>
 
       {selectedPlayer?.playerName == sessionStorage.getItem("playername") ? (
-        <IdentifierComponent
-          identifier={selectedPlayer?.identifier}
-        ></IdentifierComponent>
+        <div>
+          <IdentifierComponent
+            identifier={selectedPlayer?.identifier}
+          ></IdentifierComponent>
+        </div>
       ) : (
         <div
           style={{
