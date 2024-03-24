@@ -100,15 +100,20 @@ function Hexagon() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const isCityCenter = (
-    gird: HexGrid,
-    players: PlayerInstance[],
-    i: number,
-    j: number
-  ) => {
+  const isCityCenter = (players: PlayerInstance[], i: number, j: number) => {
     let isCC = false;
     players.forEach((p) => {
       if (p.crewInfo.cityCenter?.x == i && p.crewInfo.cityCenter?.y == j)
+        isCC = true;
+    });
+
+    return isCC;
+  };
+
+  const isCurrentRegion = (players: PlayerInstance[], i: number, j: number) => {
+    let isCC = false;
+    players.forEach((p) => {
+      if (p.crewInfo.currentRegion?.x == i && p.crewInfo.currentRegion?.y == j)
         isCC = true;
     });
 
@@ -122,25 +127,79 @@ function Hexagon() {
     const { zoomIn, zoomOut, resetTransform } = useControls();
 
     return (
-      <div>
+      <div
+        style={{
+          marginTop: "10px",
+          marginBottom: "10px",
+          marginLeft: "10px",
+        }}
+      >
         <button
           className="zoomController"
           onClick={() => zoomIn(0.1)}
-          style={{ padding: "5px" }}
+          style={{
+            padding: "5px",
+            backgroundColor: "#8B4513",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            marginRight: "10px",
+            transition: "transform 0.3s",
+            transform: "scale(1)",
+            fontFamily: "MadimiOne",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         >
           Zoom In
         </button>
         <button
           className="zoomController"
           onClick={() => zoomOut(0.1)}
-          style={{ padding: "5px" }}
+          style={{
+            padding: "5px",
+            backgroundColor: "#8B4513",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            marginRight: "10px",
+            transition: "transform 0.3s",
+            transform: "scale(1)",
+            fontFamily: "MadimiOne",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         >
           Zoom Out
         </button>
         <button
           className="zoomController"
           onClick={() => resetTransform(250, "linear")}
-          style={{ padding: "5px" }}
+          style={{
+            padding: "5px",
+            backgroundColor: "#8B4513",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            marginRight: "10px",
+            transition: "transform 0.3s",
+            transform: "scale(1)",
+            fontFamily: "MadimiOne",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         >
           Reset
         </button>
@@ -177,7 +236,7 @@ function Hexagon() {
       style={{
         width: `${gridWidth}px`,
         height: `${gridHeight + 100}px`,
-        overflow: "auto",
+        // overflow: "auto",
         // border: "5px solid #ff9646",
         // borderRadius: "20px",
       }}
@@ -185,102 +244,147 @@ function Hexagon() {
       <TransformWrapper>
         <Controls />
         <TransformComponent>
-          {arr2.map((data, i) => {
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                }}
-                key={i}
-              >
-                {data.map((ignore, j) => {
-                  return (
-                    <div
-                      key={j}
-                      style={{
-                        transform: `translate(-${(35 * j) / 4}px, ${
-                          j % 2 === 0 ? "21px" : "0px"
-                        })`,
-                        background: "white",
-                        marginTop: j % 2 === 0 ? "3px" : "0px",
-                        backgroundColor: `${HexGrid.grid[i][j].regionColor}`,
-                      }}
-                      className={"hex-grid-content"}
-                    >
-                      <div>
-                        {playerData.map((player: any, index) => {
-                          return (
-                            <div key={index}>
-                              {player.crewInfo.cityCenter?.x == i &&
-                              player.crewInfo.cityCenter?.y == j ? (
-                                <img
-                                  style={{
-                                    position: "absolute",
-                                    top: "50%",
-                                    left: "50%",
-                                    transform: "translate(-50%, -30%)",
-                                    width: "40px",
-                                    height: "40px",
-                                  }}
-                                  src={`./castle-${
-                                    player.crewInfo.playerColor.split("#")[1]
-                                  }.png`}
-                                />
-                              ) : (
-                                <></>
-                              )}
-
-                              {player.crewInfo.currentRegion?.x == i &&
-                              player.crewInfo.currentRegion?.y == j ? (
-                                <img
-                                  style={{
-                                    position: "absolute",
-                                    top: "50%",
-                                    left: "50%",
-                                    transform: "translate(-50%, -43%)",
-                                    width: "40px",
-                                    height: "35px",
-                                  }}
-                                  src={`./player-${
-                                    player.crewInfo.playerColor.split("#")[1]
-                                  }.png`}
-                                />
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
+          <div style={{ marginLeft: "60px" }}>
+            {arr2.map((data, i) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                  key={i}
+                >
+                  {data.map((ignore, j) => {
+                    return (
                       <div
+                        key={j}
                         style={{
-                          position: "relative",
-                          color: `${setContrastText(
-                            HexGrid.grid[i][j].regionColor
-                          )}`,
-
-                          fontSize: "16px",
-                          alignItems: "center",
-                          transform: `translate(-50%, -${
-                            isCityCenter(HexGrid, playerData, i, j)
-                              ? `110`
-                              : `50`
-                          }%)`,
-                          top: "50%",
-                          left: "50%",
+                          transform: `translate(-${(35 * j) / 4}px, ${
+                            j % 2 === 0 ? "21px" : "0px"
+                          })`,
+                          background: "white",
+                          marginTop: j % 2 === 0 ? "3px" : "0px",
+                          backgroundColor: `${HexGrid.grid[i][j].regionColor}`,
                         }}
+                        className={"hex-grid-content"}
                       >
-                        {HexGrid.grid[i][j].regionColor === "#ffffff"
-                          ? ""
-                          : String(HexGrid.grid[i][j].deposit)}
+                        <div>
+                          {playerData.map((player: any, index) => {
+                            return (
+                              <div key={index}>
+                                {player.crewInfo.cityCenter?.x == i &&
+                                player.crewInfo.cityCenter?.y == j ? (
+                                  <img
+                                    style={{
+                                      position: "absolute",
+                                      top: "50%",
+                                      left: "50%",
+                                      transform: `translate(-${
+                                        isCurrentRegion(playerData, i, j)
+                                          ? `10`
+                                          : `50`
+                                      }%, -25%)`,
+                                      width: "30px",
+                                      height: "30px",
+                                    }}
+                                    src={`./castle-${
+                                      setContrastText(
+                                        HexGrid.grid[i][j].regionColor
+                                      ).split("#")[1]
+                                    }.png`}
+                                  />
+                                ) : (
+                                  <></>
+                                )}
+                                {/* add camp for each player */}
+                                {HexGrid.grid[i][j].regionColor !== "#ffffff" &&
+                                !isCityCenter(playerData, i, j) ? (
+                                  <img
+                                    style={{
+                                      position: "absolute",
+                                      top: "50%",
+                                      left: "50%",
+                                      transform: `translate(-${
+                                        isCurrentRegion(playerData, i, j)
+                                          ? `10`
+                                          : `50`
+                                      }%, 23%)`,
+                                      width: "20px",
+                                      height: "20px",
+                                    }}
+                                    src={`./camp-${
+                                      setContrastText(
+                                        HexGrid.grid[i][j].regionColor
+                                      ).split("#")[1]
+                                    }.png`}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                                {player.crewInfo.currentRegion?.x == i &&
+                                player.crewInfo.currentRegion?.y == j ? (
+                                  <img
+                                    style={{
+                                      position: "absolute",
+                                      top: "50%",
+                                      left: "50%",
+                                      transform: `translate(-${
+                                        isCityCenter(playerData, i, j) ||
+                                        HexGrid.grid[i][j].regionColor !=
+                                          "#ffffff"
+                                          ? `90`
+                                          : `50`
+                                      }%, -25%)`,
+                                      width: "30px",
+                                      height: "30px",
+                                    }}
+                                    src={`./crew-${
+                                      player.crewInfo.playerColor.split("#")[1]
+                                    }${
+                                      HexGrid.grid[i][j].regionColor ===
+                                      "#ffffff"
+                                        ? "-b"
+                                        : ""
+                                    }.png`}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div
+                          style={{
+                            position: "relative",
+                            color: `${setContrastText(
+                              HexGrid.grid[i][j].regionColor
+                            )}`,
+                            fontFamily: "MadimiOne",
+
+                            fontSize: "15px",
+                            alignItems: "center",
+                            transform: `translate(-50%, -${
+                              isCityCenter(playerData, i, j) ||
+                              isCurrentRegion(playerData, i, j)
+                                ? `110`
+                                : `70`
+                            }%)`,
+                            top: "50%",
+                            left: "50%",
+                          }}
+                        >
+                          {HexGrid.grid[i][j].regionColor === "#ffffff"
+                            ? ""
+                            : String(HexGrid.grid[i][j].deposit)}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
         </TransformComponent>
       </TransformWrapper>
     </div>

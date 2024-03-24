@@ -106,7 +106,35 @@ function PlayerInfo() {
 
   const colourStyles = {
     control: (styles) => {
-      return { ...styles, backgroundColor: `white` };
+      const playerColor = selectedPlayer
+        ? selectedPlayer.crewInfo.playerColor
+        : "#ffffff";
+      return {
+        ...styles,
+        backgroundColor: `${playerColor}`,
+        color: `${setContrastText(playerColor)}`,
+        border: "5px",
+      };
+    },
+    placeholder: (styles, { data }) => {
+      const playerColor = selectedPlayer
+        ? selectedPlayer.crewInfo.playerColor
+        : "#ffffff";
+      return {
+        ...styles,
+        ...dot(`${playerColor}`),
+        color: setContrastText(playerColor),
+      };
+    },
+    singleValue: (styles, { data }) => {
+      const playerColor = selectedPlayer
+        ? selectedPlayer.crewInfo.playerColor
+        : "#ffffff";
+      return {
+        ...styles,
+        ...dot(data.value.crewInfo.playerColor),
+        color: setContrastText(playerColor),
+      };
     },
     option: (styles, { data }) => {
       const playerColor = data.value.crewInfo.playerColor;
@@ -117,56 +145,181 @@ function PlayerInfo() {
       };
     },
 
-    input: (styles) => ({ ...styles, ...dot() }),
-    placeholder: (styles) => ({
+    menu: (styles) => ({
       ...styles,
-      ...dot(
-        `${selectedPlayer ? selectedPlayer.crewInfo.playerColor : "%ccc"}`
-      ),
+      backgroundColor: "#112a46",
+      color: setContrastText("#112a46"),
     }),
-    singleValue: (styles, { data }) => ({
-      ...styles,
-      ...dot(data.value.crewInfo.playerColor),
-    }),
-  };
 
+    noOptionsMessage: (styles) => ({
+      ...styles,
+      backgroundColor: "#112a46",
+      color: setContrastText("#112a46"),
+    }),
+
+    input: (styles) => ({ ...styles, ...dot() }),
+  };
   return (
     <div>
       <div style={{ width: "95%" }}>
-        <div style={{ paddingBottom: "50px" }}>Players Infomation</div>
-
-        <Select
-          options={allPlayers}
-          styles={colourStyles}
-          placeholder={allPlayers[currentPlayerIndex]?.label + ""}
-          onChange={handlePlayerChange}
-        />
+        <div
+          style={{
+            paddingBottom: "5px",
+            marginTop: "5px",
+            paddingTop: "5px",
+            marginBottom: "15px",
+            fontFamily: "MadimiOne",
+            fontSize: "24px",
+            fontWeight: "bold",
+            justifyContent: "center",
+            display: "flex",
+            borderRadius: "10px",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          Players Infomation
+        </div>
+        <div
+          style={{
+            boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.2)",
+            borderRadius: "20px",
+          }}
+        >
+          {" "}
+          <span style={{ fontFamily: "MadimiOne", fontSize: "18px " }}>
+            {" "}
+            <Select
+              options={allPlayers}
+              styles={colourStyles}
+              placeholder={allPlayers[currentPlayerIndex]?.label + ""}
+              onChange={handlePlayerChange}
+            />
+          </span>
+        </div>
       </div>
-      <div style={{ paddingTop: "30px" }}>
-        Name: {selectedPlayer?.playerName}
+      <div
+        style={{
+          paddingTop: "20px",
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        {" "}
+        <span
+          style={{
+            color: "#CAF8F4",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontFamily: "MadimiOne",
+          }}
+        >
+          Name : {selectedPlayer?.playerName}
+        </span>
       </div>
-      <div>Budget: {selectedPlayer?.crewInfo.budget}</div>
-      <div>
-        Current Region: ({selectedPlayer?.crewInfo.currentRegion.x + 1},
-        {selectedPlayer?.crewInfo.currentRegion.y + 1})
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          fontFamily: "MadimiOne",
+        }}
+      >
+        {" "}
+        <span
+          style={{
+            color: "#F4FF7A",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontFamily: "MadimiOne",
+          }}
+        >
+          Budget : {selectedPlayer?.crewInfo.budget}
+        </span>
       </div>
-      <div>
-        City Center:{" "}
-        {selectedPlayer?.crewInfo.cityCenter
-          ? "(" +
-            (selectedPlayer?.crewInfo.cityCenter.x + 1) +
-            ", " +
-            (selectedPlayer?.crewInfo.cityCenter.y + 1) +
-            ")"
-          : "(Lost City Center)"}
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0)",
+          fontFamily: "MadimiOne",
+        }}
+      >
+        {" "}
+        <span
+          style={{
+            color: "#070303",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          Current Region : ({selectedPlayer?.crewInfo.currentRegion.x + 1},
+          {selectedPlayer?.crewInfo.currentRegion.y + 1})
+        </span>
+      </div>
+      <div
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+          transform: "rotateX(30deg)",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          fontFamily: "MadimiOne",
+        }}
+      >
+        {" "}
+        <span
+          style={{
+            color: "#070303",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0)",
+          }}
+        >
+          City Center :{" "}
+          {selectedPlayer?.crewInfo.cityCenter
+            ? "(" +
+              selectedPlayer?.crewInfo.cityCenter.x +
+              ", " +
+              selectedPlayer?.crewInfo.cityCenter.y +
+              ")"
+            : "(Lost City Center)"}
+        </span>
       </div>
 
       {selectedPlayer?.playerName == sessionStorage.getItem("playername") ? (
-        <IdentifierComponent
-          identifier={selectedPlayer?.identifier}
-        ></IdentifierComponent>
+        <div>
+          <IdentifierComponent
+            identifier={selectedPlayer?.identifier}
+          ></IdentifierComponent>
+        </div>
       ) : (
-        <div>Identifier: (Secret)</div>
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: "24px",
+            perspective: "1000px",
+            transformStyle: "preserve-3d",
+            transform: "rotateX(30deg)",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <span
+            style={{
+              color: "skyblue",
+              fontFamily: "MadimiOne",
+              textShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            Identifier : (Secret)
+          </span>
+        </div>
       )}
     </div>
   );

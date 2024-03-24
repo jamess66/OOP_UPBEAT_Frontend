@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 
 import "./constructionplan.css";
@@ -39,17 +39,32 @@ function constructionPlanTab() {
     console.log(stringConstructionPlan);
     constructionSubmit();
   };
+  useEffect(() => {
+    const a = sessionStorage.getItem("constructionPlan");
+    if (a) {
+      setStringConstructionPlan(a);
+    }
+  }, []);
 
+  useEffect(() => {
+    sessionStorage.setItem("constructionPlan", stringConstructionPlan);
+  });
   return (
     <div>
       <div
         style={{
-          paddingBottom: "30px",
-          paddingTop: "10px",
-          fontFamily: "Anakotmai",
+          paddingBottom: "5px",
+          marginTop: "5px",
+          paddingTop: "5px",
+          marginBottom: "10px",
+          fontFamily: "MadimiOne",
           fontSize: "20px",
           fontWeight: "bold",
+          paddingRight: "35px",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
           justifyContent: "center",
+          borderRadius: "10px",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
           display: "flex",
         }}
       >
@@ -64,16 +79,26 @@ function constructionPlanTab() {
           style={{
             resize: "none",
             width: "95%",
+            // height: "400px",
+            fontFamily: "MadimiOne",
           }}
         ></textarea>
         <button
-          className="bg-lime-500 size-7/12 min-h-12 rounded-2xl transition-all duration-200 transform hover:scale-110 focus:outline-none"
+          className="bg-lime-500 size-7/12 min-h-12 rounded-2xl transition-all duration-200 transform hover:scale-110 hover:shadow-lg focus:outline-none"
           style={{
             color: "black",
-            marginLeft: "17%",
-            fontFamily: "Anakotmai",
+            marginLeft: "26%",
+            fontFamily: "MadimiOne",
             fontWeight: "bold",
             perspective: "1000px",
+            transitionDuration: "0.4s",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+            width: "40%",
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            justifyItems: "center",
+            justifySelf: "center",
           }}
         >
           Submit

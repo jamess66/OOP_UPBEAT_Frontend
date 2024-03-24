@@ -55,7 +55,6 @@ function playergame() {
       e.preventDefault();
       return;
     }
-
     createPlayer();
   };
 
@@ -78,11 +77,13 @@ function playergame() {
     }
     return false;
   };
-
   return (
     <header className="background">
       <div className="boderuser">
-        <div className="component-setplayergame-front">
+        <div
+          className="component-setplayergame-front"
+          style={{ fontFamily: "MadimiOne" }}
+        >
           USERNAME
           <form>
             <input

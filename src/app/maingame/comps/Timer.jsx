@@ -14,6 +14,9 @@ const AlarmClock = () => {
 
   const [player, setPlayer] = useState();
 
+  const [players, setPlayers] = useState([]);
+  const [currentTurnPlayer, setcurrentTurnPlayer] = useState();
+
   const fetchPlayerTurn = async () => {
     try {
       const response = await fetch(
@@ -23,7 +26,7 @@ const AlarmClock = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        //console.log(data);
+        // console.log(data);
         setIsPlayerTurn(data);
       } else {
         console.error("Error fetching time data:", response.statusText);
@@ -33,20 +36,24 @@ const AlarmClock = () => {
     }
   };
 
-  // const fetchPlayerInfo = async () => {
-  //   try {
-  //     const name = sessionStorage.getItem("playername");
-  //     const response = await fetch(
-  //       `http://${localStorage.getItem("serveradress")}:8080/player/${name}`
-  //     );
-
-  //     if (response.data) {
-  //       setPlayer(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error checking data:", error);
-  //   }
-  // };
+  const fetchPlayers = async () => {
+    try {
+      const response = await fetch(
+        `http://${localStorage.getItem("serveradress")}:8080/players`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        if (data) {
+          // console.log("Received data:", data);
+          setPlayers(data);
+        }
+      } else {
+        console.error("Error fetching player data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching player data:", error);
+    }
+  };
 
   const getPlayerTimes = async () => {
     try {
@@ -179,13 +186,13 @@ const AlarmClock = () => {
     check();
     const intervalId = setInterval(check, refreshInterval);
     return () => clearInterval(intervalId);
-  });
+  }, []);
 
-  // useEffect(() => {
-  //   fetchPlayerInfo();
-  //   const intervalId = setInterval(fetchPlayerInfo, refreshInterval);
-  //   return () => clearInterval(intervalId);
-  // });
+  useEffect(() => {
+    fetchPlayers();
+    const intervalId = setInterval(fetchPlayers, refreshInterval);
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     fetchPlayerTurn();
@@ -231,25 +238,94 @@ const AlarmClock = () => {
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   };
+  useEffect(() => {
+    players.map((p) => {
+      if (p.isPlayerTurn == true) {
+        setcurrentTurnPlayer(p);
+      }
+    });
+  }, [players]);
 
+  useEffect(() => {
+    console.log("curre", currentTurnPlayer);
+  }, [currentTurnPlayer]);
   return (
-    <div>
-      <span>Player: {player?.playerName}</span>
-      <span>
-        {" "}
-        <div
-          style={{
-            display: "inline-block",
-            width: "20px",
-            height: "20px",
-            transform: "translate(0%, 30%)",
-            background: `${player?.crewInfo.playerColor}`,
-          }}
-        ></div>
-      </span>
+    <div
+      style={{
+        fontFamily: "MadimiOne",
+        fontSize: "18px",
+        fontWeight: "bold",
+        color: "whitesmoke",
+        textShadow: "2px 4px 3px rgba(0, 0, 0, 0.25)",
+      }}
+    >
+      <div>
+        <span>
+          <span style={{ color: "whitesmoke" }}>Player:</span>{" "}
+          <span
+            style={{
+              color: `${player?.crewInfo.playerColor}`,
+              textShadow: " 1px 1px 3px rgba(0, 0, 0, 0.4)",
+            }}
+          >
+            {player?.playerName}
+          </span>
+        </span>
+        <span>
+          {" "}
+          <div
+            style={{
+              display: "inline-block",
+              width: "20px",
+              height: "20px",
 
-      <p>Time remaining: {formatTime(remainingTime)}</p>
-      <p>Reserve Time: {formatTime(reserveTime)}</p>
+              borderRadius: "5px",
+              transform: "translate(30%, 20%)",
+              boxShadow: "1px 1px 2px rgba(0, 0, 0, 0.9)",
+              background: `${player?.crewInfo.playerColor}`,
+            }}
+          ></div>
+        </span>
+      </div>
+      <div>
+        <span>
+          <span style={{ color: "#B7FEEE" }}>Current Turn:</span>{" "}
+          <span
+            style={{
+              color: `${currentTurnPlayer?.crewInfo.playerColor}`,
+              textShadow: " 1px 1px 3px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            {currentTurnPlayer?.playerName == player?.playerName
+              ? "Your Turn"
+              : currentTurnPlayer?.playerName}
+          </span>
+        </span>
+        <span>
+          {" "}
+          <div
+            style={{
+              display: "inline-block",
+              width: "20px",
+              height: "20px",
+              borderRadius: "5px",
+              transform: "translate(30%, 20%)",
+              boxShadow: "1px 1px 2px rgba(0, 0, 0, 0.9)",
+              background: `${currentTurnPlayer?.crewInfo.playerColor}`,
+            }}
+          ></div>
+        </span>
+      </div>
+
+      <p>
+        <span style={{ color: "#A7FFD0" }}>Time remaining</span> :{" "}
+        {formatTime(remainingTime)}
+      </p>
+      <p>
+        {" "}
+        <span style={{ color: "#F9FFC8" }}>Reserve Time</span> :{" "}
+        {formatTime(reserveTime)}
+      </p>
     </div>
   );
 };
