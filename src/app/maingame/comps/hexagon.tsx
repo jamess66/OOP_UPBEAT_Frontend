@@ -105,10 +105,15 @@ function Hexagon() {
     players.forEach((p) => {
       if (p.crewInfo.cityCenter?.x == i && p.crewInfo.cityCenter?.y == j)
         isCC = true;
-      else if (
-        p.crewInfo.currentRegion?.x == i &&
-        p.crewInfo.currentRegion?.y == j
-      )
+    });
+
+    return isCC;
+  };
+
+  const isCurrentRegion = (players: PlayerInstance[], i: number, j: number) => {
+    let isCC = false;
+    players.forEach((p) => {
+      if (p.crewInfo.currentRegion?.x == i && p.crewInfo.currentRegion?.y == j)
         isCC = true;
     });
 
@@ -274,12 +279,18 @@ function Hexagon() {
                                       position: "absolute",
                                       top: "50%",
                                       left: "50%",
-                                      transform: "translate(-50%, -30%)",
-                                      width: "40px",
-                                      height: "40px",
+                                      transform: `translate(-${
+                                        isCurrentRegion(playerData, i, j)
+                                          ? `10`
+                                          : `50`
+                                      }%, -25%)`,
+                                      width: "30px",
+                                      height: "30px",
                                     }}
                                     src={`./castle-${
-                                      player.crewInfo.playerColor.split("#")[1]
+                                      setContrastText(
+                                        HexGrid.grid[i][j].regionColor
+                                      ).split("#")[1]
                                     }.png`}
                                   />
                                 ) : (
@@ -293,12 +304,18 @@ function Hexagon() {
                                       position: "absolute",
                                       top: "50%",
                                       left: "50%",
-                                      transform: "translate(-50%, -25%)",
-                                      width: "30px",
-                                      height: "30px",
+                                      transform: `translate(-${
+                                        isCurrentRegion(playerData, i, j)
+                                          ? `10`
+                                          : `50`
+                                      }%, 23%)`,
+                                      width: "20px",
+                                      height: "20px",
                                     }}
                                     src={`./camp-${
-                                      player.crewInfo.playerColor.split("#")[1]
+                                      setContrastText(
+                                        HexGrid.grid[i][j].regionColor
+                                      ).split("#")[1]
                                     }.png`}
                                   />
                                 ) : (
@@ -311,12 +328,23 @@ function Hexagon() {
                                       position: "absolute",
                                       top: "50%",
                                       left: "50%",
-                                      transform: "translate(-50%, -25%)",
+                                      transform: `translate(-${
+                                        isCityCenter(playerData, i, j) ||
+                                        HexGrid.grid[i][j].regionColor !=
+                                          "#ffffff"
+                                          ? `90`
+                                          : `50`
+                                      }%, -25%)`,
                                       width: "30px",
                                       height: "30px",
                                     }}
-                                    src={`./player-${
+                                    src={`./crew-${
                                       player.crewInfo.playerColor.split("#")[1]
+                                    }${
+                                      HexGrid.grid[i][j].regionColor ===
+                                      "#ffffff"
+                                        ? "-b"
+                                        : ""
                                     }.png`}
                                   />
                                 ) : (
@@ -337,7 +365,10 @@ function Hexagon() {
                             fontSize: "15px",
                             alignItems: "center",
                             transform: `translate(-50%, -${
-                              isCityCenter(playerData, i, j) ? `110` : `50`
+                              isCityCenter(playerData, i, j) ||
+                              isCurrentRegion(playerData, i, j)
+                                ? `110`
+                                : `70`
                             }%)`,
                             top: "50%",
                             left: "50%",
